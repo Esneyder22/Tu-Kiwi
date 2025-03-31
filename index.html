@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensaje Secreto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://i.imgur.com/UvFJVfe.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            text-shadow: 2px 2px 5px black;
+        }
+        .hidden {
+            display: none;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            top: -50px;
+        }
+        input, button {
+            padding: 10px;
+            margin-top: 10px;
+        }
+        h3 {
+            color: #800080;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Mensaje de restricción de horario -->
+    <div id="bloqueoHorario" class="container hidden">
+        <h2>⏳ La página estará disponible después de la hora establecida.</h2>
+        <p>Vuelve más tarde.</p>
+    </div>
+
+    <!-- Contenido normal de la página -->
+    <div id="contenidoPagina" class="container hidden">
+        <h2 id="titulo">💜Soy Kiwi, pon la fecha de nuestro Noviazgo, Porfa💚</h2>
+        
+        <div id="loginSection">
+            <input type="password" id="password" placeholder="DDMMAAAA">
+            <button onclick="verificarClave()">Ingresar</button>
+        </div>
+        
+        <div id="mensaje" class="hidden">
+            <h3>My Chatica</h3>
+            <p>Te extraño demasiado, ¿Podemos Hablar? 💜💚</p>
+            <p>Si tu respuesta es sí, envíame un mensaje a mi </p>
+            <a id="whatsappLink" class="whatsapp-button">WhatsApp</a>
+        </div>
+    </div>
+
+    <script>
+        // Definir la hora permitida (Formato 24H:MM)
+        const horaPermitida = "21:30";  // Cambia esta hora según necesites (Ejemplo: 9:30 PM)
+
+        function verificarHorario() {
+            const ahora = new Date();
+            const horas = ahora.getHours();
+            const minutos = ahora.getMinutes();
+            const horaActual = `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;
+
+            if (horaActual >= horaPermitida) {
+                document.getElementById("contenidoPagina").classList.remove("hidden");
+            } else {
+                document.getElementById("bloqueoHorario").classList.remove("hidden");
+            }
+        }
+
+        // Verificar la hora al cargar la página
+        verificarHorario();
+    </script>
+
+</body>
+</html>
